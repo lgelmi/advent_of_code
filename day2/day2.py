@@ -1,22 +1,29 @@
 import dataclasses
+import functools
 from pathlib import Path
 from typing import List, Tuple, Optional
 
 
 @dataclasses.dataclass
 class TobogganPasswordPolicy:
-    minimum: int
-    maximum: int
+    positions: List[int]
     character: str
 
     @classmethod
     def from_str(cls, code: str) -> "TobogganPasswordPolicy":
-        minimum, right = code.split("-")
-        maximum, character = right.split()
-        return cls(int(minimum), int(maximum), character)
+        left, character = code.split()
+        positions = map(int, left.split("-"))
+        return cls(sorted(list(positions)), character)
 
     def validate(self, password: str) -> bool:
-        return self.minimum <= password.count(self.character) <= self.maximum
+        minimum, maximum = self.positions[0], self.positions[-1]
+        return minimum <= password.count(self.character) <= maximum
+
+    def official_validate(self, password: str) -> bool:
+        at_positions = map(
+            lambda position: password[position - 1] == self.character, self.positions
+        )
+        return functools.reduce(lambda x, y: x ^ y, at_positions)
 
 
 @dataclasses.dataclass
@@ -34,6 +41,9 @@ class TobogganPasswordEntry:
     def validate(self) -> bool:
         return self.policy.validate(self.password)
 
+    def official_validate(self) -> bool:
+        return self.policy.official_validate(self.password)
+
 
 def read_input() -> List[TobogganPasswordEntry]:
     with open(Path(Path(__file__).parent, "input")) as f:
@@ -44,33 +54,11 @@ def solve_1(values: List[TobogganPasswordEntry]):
     print(sum(list(map(TobogganPasswordEntry.validate, values))))
 
 
-#
-# def find_couple(values: List[int], total=year) -> Optional[Tuple[int, int]]:
-#     for left in values:
-#         right = total - left
-#         if right < left:
-#             break
-#         if right in values:
-#             return left, right
-#
-#
-# def solve_2(values: List[int]):
-#     left, middle, right = find_triplet(values)
-#     print("Triplet", left, middle, right)
-#     print(left * middle * right)
-#
-#
-# def find_triplet(values: List[int], total=year) -> Tuple[int, int, int]:
-#     for index, left in enumerate(values):
-#         subyear = total - left
-#         try:
-#             middle, right = find_couple(values[index:], subyear)
-#             return left, middle, right
-#         except TypeError:
-#             continue
-#
+def solve_2(values: List[TobogganPasswordEntry]):
+    print(sum(list(map(TobogganPasswordEntry.official_validate, values))))
+
 
 if __name__ == "__main__":
     values = read_input()
     solve_1(values)
-    # solve_2(values)
+    solve_2(values)
