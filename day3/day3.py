@@ -1,5 +1,6 @@
 import functools
 import itertools
+import operator
 from pathlib import Path
 from typing import Iterable, List
 
@@ -35,7 +36,7 @@ def solve_1(values: List[str]):
 def solve_2(values: List[str]):
     slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
     traversed = [traversed_tree(values, right, down) for right, down in slopes]
-    print(functools.reduce(lambda x, y: x * y, traversed))
+    print(functools.reduce(operator.mul, traversed))
 
 
 if __name__ == "__main__":
