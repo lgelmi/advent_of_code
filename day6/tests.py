@@ -1,10 +1,10 @@
 import unittest
 
-from .day5 import *
+from .day6 import *
 
 
-class TestDay5(unittest.TestCase):
-    def test_decode_row(self):
+class TestDay4(unittest.TestCase):
+    def test_count(self):
         self.assertEqual(44, decode_row("FBFBBFFRLR"))
 
     def test_decode_column(self):
