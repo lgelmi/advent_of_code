@@ -3,10 +3,6 @@ import re
 from pathlib import Path
 from typing import List, Set, Dict
 
-"""
-bag, number color, number color
-"""
-
 
 def read_input() -> Dict[str, Counter]:
     with open(Path(Path(__file__).parent, "input")) as f:
