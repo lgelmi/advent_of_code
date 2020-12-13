@@ -1,10 +1,6 @@
 import itertools
-import operator
-from collections import Counter
-import re
-from functools import reduce
 from pathlib import Path
-from typing import List, Set, Dict, Tuple, Optional, NewType, Iterator
+from typing import List, Tuple, Optional, Iterator
 
 SeatsMapType = List[List[Optional[bool]]]
 SEAT_CHARS = {"#": True, "L": False, ".": None}
@@ -107,6 +103,7 @@ def should_be_occupied_visible(
         return seat
     return visible_occupied(row, col, seats, row_length, col_length) == 0
 
+
 def leave_visible_seats(seats: SeatsMapType) -> SeatsMapType:
     row_length = len(seats)
     row_seats = list(range(row_length))
@@ -121,7 +118,9 @@ def leave_visible_seats(seats: SeatsMapType) -> SeatsMapType:
     ]
 
 
-def update_left_visible_state(row: int, col: int, seats: SeatsMapType, row_length, col_length):
+def update_left_visible_state(
+    row: int, col: int, seats: SeatsMapType, row_length, col_length
+):
     seat = seats[row][col]
     if seat in [None, False]:
         return seat
@@ -172,6 +171,7 @@ def find_stable_seats(seats: SeatsMapType) -> SeatsMapType:
             return new_state
         initial_state = new_state
 
+
 def find_stable_visible_seats(seats: SeatsMapType) -> SeatsMapType:
     initial_state = fill_seats(seats)
     step_behaviours = [leave_visible_seats, occupy_visible_seats]
@@ -190,6 +190,7 @@ def solve_1(values):
 def solve_2(values):
     print("--------------- 2 ---------------")
     print(seats_to_str(find_stable_visible_seats(values)).count("#"))
+
 
 # This solution sucks, but I'm tired today
 if __name__ == "__main__":
