@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Set
+from typing import List
 
 
 def read_input():

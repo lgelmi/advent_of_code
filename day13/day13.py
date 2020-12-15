@@ -1,6 +1,6 @@
 import itertools
 from pathlib import Path
-from typing import List, Set, Dict, Tuple, Optional, NewType, Iterator, Callable
+from typing import List, Tuple
 
 
 def read_input():
@@ -54,7 +54,6 @@ def solve_2(values):
     print(find_timestamp(buses))
 
 
-# This solution sucks, but I'm tired today
 if __name__ == "__main__":
     values = read_input()
     solve_1(values)

@@ -1,9 +1,8 @@
 import dataclasses
 import enum
 import functools
-import itertools
 from pathlib import Path
-from typing import List, Set, Dict, Tuple, Optional, NewType, Iterator, Callable
+from typing import List
 
 
 class Direction(enum.Enum):
@@ -172,7 +171,6 @@ def solve_2(values):
     print(ship.position.manhattan)
 
 
-# This solution sucks, but I'm tired today
 if __name__ == "__main__":
     values = read_input()
     solve_1(values)
