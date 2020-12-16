@@ -103,7 +103,6 @@ def solve_2(values):
     print(sum(system.memory.values()))
 
 
-# This solution sucks, but I'm tired today
 if __name__ == "__main__":
     values = read_input()
     solve_1(values)
