@@ -41,7 +41,7 @@ def navigate_submarine(submarine: SubMarine, directions: InputType) -> SubMarine
 
 
 def solve_2(values: InputType):
-    submarine = navigate_submarine(AimedSubMarine(0,0, 0), values)
+    submarine = navigate_submarine(AimedSubMarine(0, 0, 0), values)
     print(submarine.position * submarine.depth)
 
 @dataclasses.dataclass
