@@ -9,7 +9,7 @@ from typing import List, Tuple, Optional
 class Board:
     def __init__(self, numbers: List[List[int]]):
         self.numbers = numpy.array(numbers)
-        self.marks = ~numpy.ones(self.numbers.shape, dtype=bool)
+        self.marks = numpy.zeros(self.numbers.shape, dtype=bool)
 
     @classmethod
     def from_str(cls, board_string: str) -> "Board":
