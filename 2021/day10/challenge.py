@@ -1,7 +1,7 @@
 from collections import deque
 from functools import reduce
 from pathlib import Path
-from typing import Dict, Iterator, List, Literal, Optional, Set, Tuple
+from typing import Iterator, List, Optional
 
 InputType = List[str]
 

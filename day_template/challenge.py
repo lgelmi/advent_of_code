@@ -7,7 +7,15 @@ InputType = List[str]
 # noinspection DuplicatedCode
 def read_input() -> InputType:
     with open(Path(Path(__file__).parent, "input")) as f:
-        return f.read().split("\n")
+        return parse_input(f.read())
+
+
+def parse_input(content: str) -> InputType:
+    return list(map(parse_row, content.split("\n")))
+
+
+def parse_row(row: str) -> str:
+    return row
 
 
 def solve_1(values: InputType):
